@@ -1,0 +1,63 @@
+class Solution
+{
+    //Function to find the smallest window in the string s consisting
+    //of all the characters of string p.
+     public static String smallestWindow(String s, String p){
+         Map<Character,Integer> h=new HashMap<>();
+         Map<Character,Integer> map=new HashMap<>();
+         for(int i=0;i<p.length();i++)
+         {
+             if(h.containsKey(p.charAt(i)))
+             {
+                 h.put(p.charAt(i),h.get(p.charAt(i))+1);
+             }
+             else
+             {
+                 h.put(p.charAt(i),1);
+             }
+         }
+         int match=0;
+         int j=0;
+         String ans=s;
+         for(int i=0;i<s.length();i++)
+         {
+             
+             if(h.containsKey(s.charAt(i)))
+             {
+                 if(map.containsKey(s.charAt(i)))
+                 {
+                     map.put(s.charAt(i),map.get(s.charAt(i))+1);
+                 }
+                 else
+                 {
+                     map.put(s.charAt(i),1);
+                 }
+                 if(h.get(s.charAt(i))==map.get(s.charAt(i)))
+                 {
+                     match++;
+                 }
+             }
+            if(h.size()==match)
+            {
+                while(!h.containsKey(s.charAt(j)) || h.get(s.charAt(j))<map.get(s.charAt(j)))
+                {
+                    if(map.containsKey(s.charAt(j)))
+                    {
+                        map.put(s.charAt(j),map.get(s.charAt(j))-1);
+                    }
+                    j++;
+                }
+                if(ans.length()>i-j+1)
+                {
+                    ans=s.substring(j,i+1);
+                }
+            }
+         }
+         if(match!=h.size())
+         {
+             return "-1";
+         }
+         return ans;
+     }
+}
+
