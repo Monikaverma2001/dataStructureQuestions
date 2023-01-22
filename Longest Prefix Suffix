@@ -1,0 +1,62 @@
+
+class Solution {
+    
+    int lps(String s) {
+        int arr[]=new int[s.length()];
+        int start=0;
+        int end=1;
+        while(end<s.length())
+        {
+            if(s.charAt(start)==s.charAt(end))
+            {
+                arr[end]=start+1;
+                start++;
+                end++;
+            }else
+            {
+                if(start==0)
+                {
+                    arr[end]=0;
+                    end++;
+                }
+                else
+                {
+                    start=arr[start-1];
+                    
+                }
+            }
+        }
+        return arr[s.length()-1];
+       
+    }
+    
+}
+
+
+// class Solution {
+//     int  max=-1;
+//     int lps(String s) {
+//         // code here
+//          this.getl(s,s.length()-2,1);
+//          return this.max;
+//     }
+//     private void getl(String s,int i,int j)
+//     {
+//         if(i==s.length()-1||j==0 || i<0 || j>s.length()-1)
+//         {
+//             return ;
+//         }
+          
+
+//         if((s.substring(0,i+1)).equals(s.substring(j,s.length())))
+//         {
+            
+//             this.max=Math.max(this.max,0+i+1);
+//           // System.out.println((s.substring(0,i+1))+" "+this.max+" "+s.substring(j,s.length()));
+//             return ;
+//         }
+        
+//       getl(s,i-1,j+1);
+//     }
+    
+// }
