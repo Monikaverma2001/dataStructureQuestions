@@ -1,0 +1,55 @@
+//{ Driver Code Starts
+import java.util.*;
+class GFG
+{
+	public static void main(String args[])
+	{
+		Scanner sc = new Scanner(System.in);
+		int t = sc.nextInt();
+		sc.nextLine();
+		while(t>0)
+		{
+			String str = sc.nextLine();
+			//System.out.println(str.length());
+			Solution ob  = new Solution();
+			System.out.println(ob.countPS(str));
+		t--;
+		}
+	}
+}
+// } Driver Code Ends
+
+
+/*You are required to complete below method */
+
+
+class Solution
+{
+    long countPS(String str)
+    {
+        int MOD = 1000000007;
+        // Your code here
+        long dp[][]=new long[str.length()+1][str.length()+1];
+        for(int i=0;i<=str.length();i++)
+        {
+            Arrays.fill(dp[i],(long)-1);
+            
+        }
+        long ans= countPS(0,str.length()-1,dp,str);
+         return ans<0?ans+MOD:ans;
+    }
+    long countPS(int i,int j,long[][] dp,String str)
+    {  int MOD = 1000000007;
+        if(i>j)
+            return (long)0;
+        if(dp[i][j]!=-1)
+            return dp[i][j];
+        if(i==j)
+            return dp[i][j]=(long)1;
+       
+        else if(str.charAt(i)==str.charAt(j))
+            return dp[i][j]=(countPS(i,j-1,dp,str)%MOD+countPS(i+1,j,dp,str)%MOD+(long)1)% MOD;
+        else return dp[i][j]=(countPS(i,j-1,dp,str)%MOD+countPS(i+1,j,dp,str)%MOD-countPS(i+1,j-1,dp,str)%MOD)%MOD;    
+    }
+}
+
