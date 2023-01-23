@@ -1,0 +1,87 @@
+
+class Solution
+{
+    
+    ArrayList<Integer> search(String pat, String txt)
+    {
+       
+     ArrayList<Integer>ans = new ArrayList<>();
+        for(int i = 0; i<=(txt.length()-pat.length()); i++){
+            int j = 0;
+            
+            for(; j<pat.length(); j++){
+                if(txt.charAt(i+j)!=pat.charAt(j)) break;
+            }
+            
+            if(j==pat.length()){
+                 ans.add(i+1);
+            
+            }
+        }
+        if(ans.size()==0)
+        {
+            ans.add(-1);
+        }
+        return ans;
+    }
+}
+
+// class Solution
+// {
+    
+//     ArrayList<Integer> search(String pat, String s)
+//     {
+//         // your code here
+//         ArrayList<Integer> ans=new ArrayList<Integer>();
+//         int h=256;
+//         int q=Integer.MAX_VALUE;
+//         int pow=0;
+//         int hash=0;;
+//         for(int i=pat.length()-1;i>=0;i--)
+//         {
+//           hash+=(powe(pow,h)*pat.charAt(i));
+//           pow++;
+//         }int p=powe(pat.length(),h);
+//         hash=hash% q;
+//       // System.out.println(hash);
+//         pow=0;
+//         int hash2=0;
+//         for(int i=pat.length()-1;i>=0;i--)
+//         {
+//           hash2+=(powe(pow,h)*s.charAt(i));
+//           pow++;
+//         }
+//         hash2=hash2%q;
+//         //System.out.println(hash2);
+//         if(hash==hash2)
+//         {
+//             ans.add(1);
+//         }
+//         int j=0;
+//         for(int i=pat.length();i<s.length();i++)
+//         {
+//             hash2=((h*hash2)-(p)*s.charAt(j)%q)+s.charAt(i))%q;
+//             j++;
+//             //System.out.println(hash2);
+//             if(hash2==hash)
+//             {
+//                 ans.add(j+1);
+//             }
+//         }
+//         if(ans.size()==0)
+//         ans.add(-1);
+//         return ans;
+//     }
+//     //2  3
+//     private static int powe(int i,int d)
+//     {
+//         if(i==0)
+//             return 1;
+//         int mul=1;
+//         for(int j=1;j<=i;j++)
+//         {
+//             mul*=d;
+//         }
+//         return mul;
+//     }
+// }
