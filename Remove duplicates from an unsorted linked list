@@ -1,0 +1,29 @@
+class Solution
+{
+    //Function to remove duplicates from unsorted linked list.
+    public Node removeDuplicates(Node head) 
+    {
+         // Your code here
+         if(head==null)
+         {
+             return null;
+         }
+         Set<Integer> set=new HashSet<>();
+        Node temp=head.next;
+        Node prev=head;
+        while(temp!=null)
+        {
+            set.add(prev.data);
+            if(set.contains(temp.data))
+            {
+                prev.next=temp.next;
+            }
+            else
+            {
+                prev=temp;
+            }
+            temp=temp.next;
+        }
+         return head;
+    }
+}
