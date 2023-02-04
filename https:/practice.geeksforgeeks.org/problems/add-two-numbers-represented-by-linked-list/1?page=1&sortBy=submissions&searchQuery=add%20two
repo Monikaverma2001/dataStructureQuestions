@@ -1,0 +1,59 @@
+class GfG {
+
+    Node cur; // Dont change the variable name, its used in main function
+    int carry; // Dont change the variable name, its used in main function
+    
+    //This function is called after the smaller list is added to the sublist of 
+    //bigger list of same size. Once the right sublist is added, the carry
+    //must be added to left side of larger list to get the final result.  
+    
+    private static Node reverse(Node head)
+    {
+         Node prev = null;
+        Node curr = head;
+        Node next;
+
+        while(curr != null) {
+            next = curr.next;
+            curr.next = prev;
+            prev = curr;
+            curr = next;
+        }
+        return prev;
+    }
+    void addCarryToRemaining(Node head, LinkedList res)  { 
+        // Write code here
+        if(head==cur)
+            return;
+        addCarryToRemaining(head.next,res);
+            int sum=head.data+carry;
+            res.push(sum%10);
+            carry=sum/10;
+        
+    } 
+    
+    //Function which adds two linked lists of same size represented by head1  
+    //and head2 and returns head of the resultant linked list. Carry
+    //is propagated while returning from the recursion    
+	void addSameSize(Node head1, Node head2, LinkedList res) { 
+	    // Write code here
+	    head1=reverse(head1);
+	    head2=reverse(head2);
+	    this.carry=0;
+	    
+	    while(head1!=null )
+	    {
+	        int val=head1.data+head2.data+carry;
+	        this.carry=val/10;
+	        val=val%10;
+	        
+	        res.push(val);
+	       
+	        head1=head1.next;
+	        head2=head2.next;
+	    }
+	    
+	    if(head1!=null)
+	        cur=head1.next;
+    }
+} 
