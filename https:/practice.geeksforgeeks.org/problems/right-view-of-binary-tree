@@ -1,0 +1,57 @@
+class Node
+{
+    int data;
+    Node left, right;
+    public Node(int data)
+    {
+        this.data = data;
+         left = right = null;
+    }
+}*/
+
+
+// class Solution{
+//     //Function to return list containing elements of right view of binary tree.
+//     ArrayList<Integer> rightView(Node node) {
+//         //add code here.
+//          ArrayList<Integer> ans=new  ArrayList<Integer>();
+//          Queue<Node> q=new ArrayDeque<>();
+//          q.add(node);
+//          while(!q.isEmpty())
+//          {
+//              int s=q.size();
+//              for(int i=0;i<s;i++)
+//              {
+//                  Node n=q.poll();
+//                  if(i==s-1)
+//                  {
+//                     ans.add(n.data); 
+//                  }
+//                  if(n.left!=null)
+//                     q.offer(n.left);
+//                 if(n.right!=null)
+//                     q.offer(n.right);
+//              }
+            
+//          }
+//          return ans;
+//     }
+// }
+class Solution{
+    //Function to return list containing elements of right view of binary tree.
+    ArrayList<Integer> rightView(Node node) {
+        //add code here.
+         ArrayList<Integer> ans=new  ArrayList<Integer>();
+        get(node,0,ans);
+         return ans;
+    }
+    private static void get(Node root,int level,ArrayList<Integer> ans)
+    {
+        if(root==null)
+            return;
+        if(ans.size()==level)
+            ans.add(root.data);
+        get(root.right,level+1,ans);
+        get(root.left,level+1,ans);
+    }
+}
