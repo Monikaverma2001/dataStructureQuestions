@@ -32,12 +32,11 @@ class Solution
     //Function to find the minimum number of swaps required to sort the array.
     public int minSwaps(int nums[])
     {
-       int arr[]=new int[nums.length];
+      
         Map<Integer,Integer> map=new HashMap<>();
         for(int i=0;i<nums.length;i++)
             map.put(nums[i],i);
-        for(int i=0;i<nums.length;i++)
-            arr[i]=nums[i];
+        
         Arrays.sort(nums);
        
         int j=nums.length-1;
@@ -45,16 +44,13 @@ class Solution
         //17 5 6 7 9 14 16 3 18
        for(int i=0;i<=j;i++)
         {
-            if(map.get(nums[i])==i)
-                continue;
-            else
+            if(map.get(nums[i])!=i)
             {
                 int temp=map.get(nums[i]);
                 int t=nums[i];
                 nums[i]=nums[temp];
                 nums[temp]=t;
                 count++;
-                
                 i--;
             }
             
