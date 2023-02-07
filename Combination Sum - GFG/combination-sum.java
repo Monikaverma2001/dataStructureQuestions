@@ -86,7 +86,7 @@ class Solution
         for(int i=start;i<A.size();i++)
         {
            if(A.get(i)>B)return; //It is sorted if one value is greater than B all values infront of it will be greater
-           if(i>0 && A.get(i)==A.get(i-1))continue; // To avoid same value repetition.
+          if(i>0 && A.get(i)==A.get(i-1))continue; // To avoid same value repetition.
            
            temp.add(A.get(i));
            helper(A,i,temp,B-A.get(i));
