@@ -44,14 +44,13 @@ class Solution
         //17 5 6 7 9 14 16 3 18
        for(int i=0;i<=j;i++)
         {
-            if(map.get(nums[i])!=i)
+            while(map.get(nums[i])!=i)
             {
                 int temp=map.get(nums[i]);
                 int t=nums[i];
                 nums[i]=nums[temp];
                 nums[temp]=t;
                 count++;
-                i--;
             }
             
            
