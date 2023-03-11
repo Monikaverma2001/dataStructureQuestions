@@ -1,0 +1,21 @@
+HEAP
+min heap and max heap
+min heap: always have minimum element on the root 
+heap is also a complete tree : all the level are filled except last. The nodes of last level filled from left to right so the complexity of insertion and deletion :O(logN)
+N=number of nodes
+
+
+our question is to calculate the height of heap which is log2(N)
+
+class Solution{
+
+    static int heapHeight(int N, int arr[]){
+        // code here
+        int count=0;
+        while(N != 1){
+            N=N/2;
+            count++;
+        }
+        return count;
+    }
+}
