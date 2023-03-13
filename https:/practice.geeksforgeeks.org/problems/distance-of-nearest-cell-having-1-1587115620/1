@@ -1,0 +1,76 @@
+
+class Solution
+{
+    class pair{
+        int i,j,d;
+        pair(int row,int col,int dis)
+        {
+            i=row;j=col;d=dis;
+        }
+    }
+    //Function to find distance of nearest 1 in the grid for each cell.
+    public int[][] nearest(int[][] grid)
+    {
+        // Code here
+        int n=grid.length,m=grid[0].length;
+        boolean vis[][]=new boolean[n][m];
+        int dis[][]=new int[n][m];
+        Queue<pair> q=new ArrayDeque<>();
+        for(int i=0;i<n;i++)
+        {
+            for(int j=0;j<m;j++)
+            {
+                if(grid[i][j]==1)
+                {
+                    q.add(new pair(i,j,0));
+                    vis[i][j]=true;
+                    dis[i][j]=0;
+                }
+                else
+                {
+                    vis[i][j]=false;
+                    dis[i][j]=0;
+                }
+            }
+        }
+          int delrow[] = {-1, 0, +1, 0}; 
+
+            int delcol[] = {0, +1, 0, -1}; 
+        while(!q.isEmpty())
+        {
+            pair p=q.peek();
+            int row=p.i;int col=p.j;int steps=p.d;
+              
+         q.remove(); 
+
+         dis[row][col] = steps; 
+
+         // for all 4 neighbours
+
+         for(int i = 0;i<4;i++)
+         {
+
+             int nrow = row + delrow[i]; 
+
+             int ncol = col + delcol[i]; 
+
+             // check for valid unvisited cell
+
+             if(nrow >= 0 && nrow < n && ncol >= 0 && ncol < m
+
+             && vis[nrow][ncol] == false)  {
+
+                     vis[nrow][ncol] = true; 
+
+                 q.add(new pair(nrow, ncol, steps+1));  
+
+             } 
+
+             
+             
+         }
+         
+        }
+        return dis;
+    }
+}
