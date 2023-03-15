@@ -1,0 +1,46 @@
+class Solution{
+    static HashMap<String,Integer> m;
+    static ArrayList<Node> list;
+    public List<Node> printAllDups(Node root)
+    {
+       //code here
+       m = new HashMap<>();
+       list = new ArrayList<>();
+       solve(root);
+       Collections.sort(list,new Comparator<Node>(){
+           @Override
+           public int compare(Node o1,Node o2){
+               if(o1.data==o2.data){
+                   return 0;
+               }else if(o1.data>o2.data){
+                   return 1;
+               }else{
+                   return -1;
+               }
+           }
+       });
+       return list;
+    }
+    public String solve(Node root){
+        if(root == null){
+            return "";
+        }
+        String str = "(";
+        str += solve(root.left);
+        str += solve(root.right);
+        str += String.valueOf(root.data);
+        str += ")";
+        
+        if(m.get(str)!=null && m.get(str)==1){
+            list.add(root);
+        }
+        
+        if(m.containsKey(str)){
+            m.put(str,m.get(str)+1);
+        }else{
+            m.put(str,1);
+        }
+        return str;
+    }
+    
+}
