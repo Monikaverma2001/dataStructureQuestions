@@ -1,0 +1,31 @@
+class GfG
+{
+    Node buildBalancedTree(Node root) 
+    {
+        //Add your code here.
+        ArrayList<Node> ans=new ArrayList<>();
+        getInorder(root,ans);
+        return getbuild(root,0,ans.size()-1, ans);
+        
+    }
+    private static void getInorder(Node root,ArrayList<Node> lyst)
+    {
+        if(root==null)
+            return;
+            
+        getInorder(root.left,lyst);
+        lyst.add(root);
+        getInorder(root.right,lyst);
+    }
+    private static Node getbuild(Node root,int i,int j,ArrayList<Node> ans)
+    {
+        if(i>j)
+            return null;
+            
+        int mid=(i+j)/2;
+        Node m=ans.get(mid);
+        m.left=getbuild(root,i,mid-1,ans);
+        m.right=getbuild(root,mid+1,j,ans);
+        return m;
+    }
+}
