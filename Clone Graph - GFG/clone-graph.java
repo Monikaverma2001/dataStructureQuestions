@@ -137,43 +137,28 @@ class GFG{
 */
 class Solution{
     Node cloneGraph(Node node){
-        if (node==null)
-        return null;
-        Map<Integer,Node>m=new HashMap<>();
-       return  Graph(node,m);
-    }
-    Node Graph(Node node,Map<Integer,Node>m){
-        if (m.containsKey(node.val))
-        return m.get(node.val);
-        Node c=new Node(node.val);
-        m.put(node.val,c);
-        for(Node u:node.neighbors)
-        c.neighbors.add(Graph(u,m));
-        return c;
-        
+        Map<Node ,Node > map=new HashMap<>();
+        Queue<Node> queue=new ArrayDeque<>();
+        if(node==null)
+            return null;
+        queue.offer(node);
+        map.put(node,new Node(node.val));
+        while(!queue.isEmpty())
+        {
+            Node cur=queue.poll();
+            for(Node n:cur.neighbors)
+            {
+                if(!map.containsKey(n))
+                {
+                    map.put(n,new Node(n.val));
+                    queue.add(n);
+                }
+                map.get(cur).neighbors.add(map.get(n));
+            }
+        }
+        return map.get(node);
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
