@@ -77,122 +77,121 @@ class GFG {
 
 
 // User function Template for Java
-// class pair{
-//     int dis,i,j;
-//     pair(int d,int index, int job)
-//     {
-//         dis=d;
-//         i=index;
-//         j=job;
-//     }
-// }
-// class Solution {
-
-//     int shortestPath(int[][] grid, int[] source, int[] destination) {
-
-//         // Your code here
-//           if(grid[source[0]][source[1]]==0) {
-
-//             return -1;
-
-//         }
-//         Queue<pair>q=new ArrayDeque<>();
-//         int dist[][]=new int[grid.length][grid[0].length];
-//         for(int i=0;i<grid.length;i++)
-//         {
-//             Arrays.fill(dist[i],Integer.MAX_VALUE);
-//         }
-//         int n=grid.length;
-//         int m=grid[0].length;
-//         boolean [][]vis=new boolean[n][m];
-//         dist[source[0]][source[1]]=0;
-//         if(source[0]==destination[0]&&source[1]==destination[1])
-//             return dist[source[0]][source[1]];
-            
-//         q.offer(new pair(0,source[0],source[1]));
-      
-//         while(!q.isEmpty())
-//         {
-//             pair cur=q.remove();
-//             if(cur.i==destination[0]&&cur.j==destination[1])
-//                 return dist[cur.i][cur.j];
-//             if(vis[cur.i][cur.j])
-//                 continue;
-//                 vis[cur.i][cur.j]=true;
-//             if(cur.i+1<n && !vis[cur.i+1][cur.j] && grid[cur.i+1][cur.j]==1)
-//             {
-//                 q.offer(new pair(cur.dis+1,cur.i+1,cur.j));
-//                 vis[cur.i+1][cur.j]=true;
-//                 dist[cur.i+1][cur.j]=Math.min(cur.dis+1,dist[cur.i+1][cur.j]);
-//             }
-//             if(cur.i-1>=0 && !vis[cur.i-1][cur.j]&& grid[cur.i-1][cur.j]==1)
-//             {
-//                 q.offer(new pair(cur.dis+1,cur.i-1,cur.j));
-//                 vis[cur.i-1][cur.j]=true;
-//                 dist[cur.i-1][cur.j]=Math.min(cur.dis+1,dist[cur.i-1][cur.j]);
-//             }
-//             if(cur.j+1<m && !vis[cur.i][cur.j+1]&&grid[cur.i][cur.j+1]==1)
-//             {
-//                 q.offer(new pair(cur.dis+1,cur.i,cur.j+1));
-//                 vis[cur.i][cur.j+1]=true;
-//                 dist[cur.i][cur.j+1]=Math.min(cur.dis+1,dist[cur.i][cur.j+1]);
-//             }
-//             if(cur.j-1>=0 && !vis[cur.i][cur.j-1]&&grid[cur.i][cur.j-1]==1)
-//             {
-//                 q.offer(new pair(cur.dis+1,cur.i,cur.j-1));
-//                 vis[cur.i][cur.j-1]=true;
-//                 dist[cur.i][cur.j-1]=Math.min(cur.dis+1,dist[cur.i][cur.j-1]);
-//             }
-//         }
-//         return -1;
-//     }
-// }
-
-
-
-
-
- class Pair{
-    int a, b, c;
-    Pair(int a,int b,int c){
-        this.a=a;
-        this.b=b;
-        this.c=c;
+class pair{
+    int dis,i,j;
+    pair(int d,int index, int job)
+    {
+        dis=d;
+        i=index;
+        j=job;
     }
 }
-
 class Solution {
+
     int shortestPath(int[][] grid, int[] source, int[] destination) {
-    int[][] temp=new int[grid.length][grid[0].length];
-        Queue<Pair> st1=new LinkedList<>();
-        st1.add(new Pair(source[0],source[1],1));
-        temp[source[0]][source[1]]=-1;
 
-        if(source[0]==destination[0]  && source[1]==destination[1])return 0;
-        while(!st1.isEmpty()){
-            Pair pp=st1.peek();
-            int a=pp.a;
-            int b=pp.b;
-            int c=pp.c;
+        // Your code here
+          if(grid[source[0]][source[1]]==0) {
 
-            int[][] arr={{1,0},{-1,0},{0,1},{0,-1}};
-            for(int i=0; i<4; i++){
-                int A=a+arr[i][0];
-                int B=b+arr[i][1];
+            return -1;
 
-                if(A>=0 && B>=0 && B<grid[0].length && A<grid.length && grid[A][B]==1&& temp[A][B]!=-1){
-                    st1.add(new Pair(A,B,c+1));
-                    temp[A][B]=-1;
-                    if(destination[0]==A && destination[1]==B){
-                        return c;
-                    }
-                }
+        }
+        Queue<pair>q=new ArrayDeque<>();
+        int dist[][]=new int[grid.length][grid[0].length];
+        for(int i=0;i<grid.length;i++)
+        {
+            Arrays.fill(dist[i],Integer.MAX_VALUE);
+        }
+        int n=grid.length;
+        int m=grid[0].length;
+        boolean [][]vis=new boolean[n][m];
+        dist[source[0]][source[1]]=0;
+        if(source[0]==destination[0]&&source[1]==destination[1])
+            return dist[source[0]][source[1]];
+            
+        q.offer(new pair(0,source[0],source[1]));
+      
+        while(!q.isEmpty())
+        {
+            pair cur=q.remove();
+            if(cur.i==destination[0]&&cur.j==destination[1])
+                return dist[cur.i][cur.j];
+            
+            vis[cur.i][cur.j]=true;
+            if(cur.i+1<n && !vis[cur.i+1][cur.j] && grid[cur.i+1][cur.j]==1)
+            {
+                q.offer(new pair(cur.dis+1,cur.i+1,cur.j));
+                vis[cur.i+1][cur.j]=true;
+                dist[cur.i+1][cur.j]=Math.min(cur.dis+1,dist[cur.i+1][cur.j]);
             }
-            st1.remove();
+            if(cur.i-1>=0 && !vis[cur.i-1][cur.j]&& grid[cur.i-1][cur.j]==1)
+            {
+                q.offer(new pair(cur.dis+1,cur.i-1,cur.j));
+                vis[cur.i-1][cur.j]=true;
+                dist[cur.i-1][cur.j]=Math.min(cur.dis+1,dist[cur.i-1][cur.j]);
+            }
+            if(cur.j+1<m && !vis[cur.i][cur.j+1]&&grid[cur.i][cur.j+1]==1)
+            {
+                q.offer(new pair(cur.dis+1,cur.i,cur.j+1));
+                vis[cur.i][cur.j+1]=true;
+                dist[cur.i][cur.j+1]=Math.min(cur.dis+1,dist[cur.i][cur.j+1]);
+            }
+            if(cur.j-1>=0 && !vis[cur.i][cur.j-1]&&grid[cur.i][cur.j-1]==1)
+            {
+                q.offer(new pair(cur.dis+1,cur.i,cur.j-1));
+                vis[cur.i][cur.j-1]=true;
+                dist[cur.i][cur.j-1]=Math.min(cur.dis+1,dist[cur.i][cur.j-1]);
+            }
         }
         return -1;
     }
 }
+
+
+
+
+
+//  class Pair{
+//     int a, b, c;
+//     Pair(int a,int b,int c){
+//         this.a=a;
+//         this.b=b;
+//         this.c=c;
+//     }
+// }
+
+// class Solution {
+//     int shortestPath(int[][] grid, int[] source, int[] destination) {
+//     int[][] temp=new int[grid.length][grid[0].length];
+//         Queue<Pair> st1=new LinkedList<>();
+//         st1.add(new Pair(source[0],source[1],1));
+//         temp[source[0]][source[1]]=-1;
+
+//         if(source[0]==destination[0]  && source[1]==destination[1])return 0;
+//         while(!st1.isEmpty()){
+//             Pair pp=st1.peek();
+//             int a=pp.a;
+//             int b=pp.b;
+//             int c=pp.c;
+
+//             int[][] arr={{1,0},{-1,0},{0,1},{0,-1}};
+//             for(int i=0; i<4; i++){
+//                 int A=a+arr[i][0];
+//                 int B=b+arr[i][1];
+
+//                 if(A>=0 && B>=0 && B<grid[0].length && A<grid.length && grid[A][B]==1&& temp[A][B]!=-1){
+//                     st1.add(new Pair(A,B,c+1));
+//                     temp[A][B]=-1;
+//                     if(destination[0]==A && destination[1]==B){
+//                         return c;
+//                     }
+//                 }
+//             }
+//             st1.remove();
+//         }
+//         return -1;
+//     }
+// }
 
 
 
