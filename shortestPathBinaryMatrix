@@ -1,0 +1,57 @@
+class Solution {
+    public int shortestPathBinaryMatrix(int[][] grid) {
+        //eight directions
+        int disx[]={-1,1,-1,0,0,1,1,-1};
+        int disy[]={-1,1,0,-1,1,0,-1,1};
+        //size of grid
+        int n=grid.length;
+        Queue<pair> q=new ArrayDeque<>();
+        if(grid[0][0]==1 || grid[n-1][n-1]==1)
+            return -1;
+        q.offer(new pair(0,0,1));
+        
+        boolean b[][]=new boolean[n][n];
+        b[0][0]=true;
+        while(!q.isEmpty())
+        {
+            int s=q.size();
+            //use BFS
+            for(int i=0;i<s;i++)
+            {
+                pair p=q.poll();
+                int x=p.i;
+                int y=p.j;
+                int z=p.dis;
+                if(x==n-1 && y==n-1)
+                    return z;
+             for(int j=0;j<8;j++)
+                {
+                    if(x+disx[j]==n-1 && y+disy[j]==n-1 )
+                        {
+                      
+                            return z+1;
+                
+                        }
+                    if(x+disx[j]>=0 && x+disx[j]<n && y+disy[j]>=0 && y+disy[j]<n
+                    && grid[x+disx[j]][y+disy[j]]==0 && !b[x+disx[j]][y+disy[j]])
+                    {
+                        q.offer(new pair(x+disx[j],y+disy[j],z+1));
+                        b[x+disx[j]][y+disy[j]]=true;
+                        
+                    }
+                }
+            }
+        }
+        return -1;
+    }
+}
+class pair{
+    //store index and cur distance from 0,0
+    int i,j,dis;
+    pair(int x,int y,int d)
+    {
+        i=x;
+        j=y;
+        dis=d;
+    }
+}
