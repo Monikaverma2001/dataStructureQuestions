@@ -1,0 +1,7 @@
+class Solution {
+    static int sumOfNaturals(int n) {
+        int m=(int)Math.pow(10,9)+7;
+        long p=n;
+        return(int)((p*(p+1)/2)%m);
+    }
+};
