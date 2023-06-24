@@ -1,0 +1,35 @@
+class Solution
+
+{
+
+    public int klengthpref(String[] arr, int n, int k, String str)
+
+    { if(str.length()<k)
+
+           return 0;
+
+        String s=str.substring(0,k);
+
+        int c=0;
+
+        for(String st : arr){
+
+            if(st.length()>=k){
+
+                String strnew=st.substring(0,k);
+
+                if(s.equals(strnew)){
+
+                    c++;
+
+                }
+
+            }
+
+        }
+
+        return c;
+
+    }
+
+}
