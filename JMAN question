@@ -1,0 +1,31 @@
+
+class HelloWorld {
+    public static void main(String[] args) {
+        String str="JMamanCAn";
+        boolean cap=false;
+        if(str.charAt(0)>='A' && str.charAt(0)<='Z')
+        {
+            cap=true;
+        }
+        String ans="";
+        for(int i=0;i<str.length()-1;i++)
+        {
+            if(cap==true && str.charAt(i)>='A' && str.charAt(i)<='Z')
+            {
+                ans+=str.charAt(i);
+                if(str.charAt(i+1)>='a' && str.charAt(i+1)<='z'){
+                    ans+=" ";
+                    cap=false;
+                }
+            }
+            else{
+                ans+=str.charAt(i);
+                if(str.charAt(i+1)>='A' && str.charAt(i+1)<='Z'){
+                    ans+=" ";
+                    cap=true;
+                }
+            }
+        }
+        System.out.println(ans);
+    }
+}
